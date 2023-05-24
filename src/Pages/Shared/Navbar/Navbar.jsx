@@ -8,15 +8,7 @@ const Navbar = () => {
 
     const navItems = <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/appoinment'>Services</Link></li>
-
-
-
-        <li><Link to='/appoinment'>My Appoinment</Link></li>
-
-
-
-        <li><Link to='/login'>Login</Link></li>
+        <li><Link to="/menu">Our Menu</Link></li>
 
 
     </>
