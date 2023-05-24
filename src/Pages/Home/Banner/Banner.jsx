@@ -12,22 +12,22 @@ const Banner = () => {
         <div >
             <Carousel className="text-center" autoPlay={true} infiniteLoop={1} interval={3000}>
                 <div>
-                    <img src={slider1} alt="" />
+                    <img className="rounded-b-lg" src={slider1} alt="" />
                 </div>
                 <div>
-                    <img src={slider2} alt="" />
+                    <img className="rounded-b-lg" src={slider2} alt="" />
                 </div>
                 <div>
-                    <img src={slider3} alt="" />
+                    <img className="rounded-b-lg" src={slider3} alt="" />
                 </div>
                 <div>
-                    <img src={slider6} alt="" />
+                    <img className="rounded-b-lg" src={slider6} alt="" />
                 </div>
                 <div>
-                    <img src={slider5} alt="" />
+                    <img className="rounded-b-lg" src={slider5} alt="" />
                 </div>
                 <div>
-                    <img src={slider4} alt="" />
+                    <img className="rounded-b-lg" src={slider4} alt="" />
                 </div>
             </Carousel>
 
