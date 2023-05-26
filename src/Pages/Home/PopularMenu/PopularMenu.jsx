@@ -8,6 +8,8 @@ const PopularMenu = () => {
     const [menu] = useMenu();
     const popularItem = menu.filter(item => item.category === "popular")
 
+    
+
     return (
         <section className="mb-12">
             <SectionTitle
