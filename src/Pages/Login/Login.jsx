@@ -1,43 +1,61 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from "../../providers/authProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import TitlePage from "../Shared/TitlePage/TitlePage";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
 
-    const captchaRef = useRef(null);
+
     const [disabled, setDisabled] = useState(true);
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const {signIn} = useContext(AuthContext)
+    const from = location.state?.from?.pathname || "/";
 
-    useEffect(() =>{
-        loadCaptchaEnginge(6); 
-    } ,[])
 
-    const handleLogin = event =>{
+    useEffect(() => {
+        loadCaptchaEnginge(6);
+    }, [])
+
+    const handleLogin = event => {
         event.preventDefault()
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
         signIn(email, password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error =>{
-            console.log(error);
-        })
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                Swal.fire(
+                    'Good job!',
+                    'You clicked the button!',
+                    'success'
+                )
+
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
 
 
     // We also can handle this thing through onChange
-    const handleValidateCaptcha = () =>{
-        const user_captcha_value = captchaRef.current.value;
-        if(validateCaptcha(user_captcha_value)){
-            setDisabled(false)
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
+        if (user_captcha_value.length == 6) {
+            if (validateCaptcha(user_captcha_value)) {
+                setDisabled(false)
+            }
+            else {
+                setDisabled(true)
+            }
         }
         else{
             setDisabled(true)
@@ -48,6 +66,9 @@ const Login = () => {
 
     return (
         <div>
+            <TitlePage title="Bistro Boss | login"></TitlePage>
+
+
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col md:flex-row flex">
                     <div className="text-center lg:text-left">
@@ -74,10 +95,9 @@ const Login = () => {
 
                             <div className="form-control">
                                 <label className="label">
-                                <LoadCanvasTemplate />
+                                    <LoadCanvasTemplate />
                                 </label>
-                                <input ref={captchaRef} name="captcha" type="text" placeholder="type the above captcha" className="input input-bordered" />
-                                <button onClick={handleValidateCaptcha} className="btn btn-outline btn-sm mt-4">Validate</button>
+                                <input onChange={handleValidateCaptcha} name="captcha" type="text" placeholder="type the above captcha" className="input input-bordered" />
                             </div>
 
 

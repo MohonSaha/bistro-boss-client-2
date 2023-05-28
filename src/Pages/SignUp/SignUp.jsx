@@ -1,11 +1,21 @@
 import { useForm } from "react-hook-form";
+import TitlePage from "../Shared/TitlePage/TitlePage";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/authProvider";
+import { Link } from "react-router-dom";
 
 
 const SignUp = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {createUser} = useContext(AuthContext)
 
     const onSubmit = data => {
         console.log(data)
+        createUser(data.email, data.password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
     };
 
 
@@ -13,6 +23,9 @@ const SignUp = () => {
 
     return (
         <div>
+            <TitlePage title="Bistro Boss | SignUp"></TitlePage>
+
+
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
@@ -67,6 +80,9 @@ const SignUp = () => {
                                 <input className="btn btn-primary" type="submit" value="SignIn" />
                             </div>
                         </form>
+
+                        <p><small>Already have an account? <Link to='/login'>Login</Link></small></p>
+
                     </div>
                 </div>
             </div>
