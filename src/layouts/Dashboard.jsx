@@ -1,8 +1,13 @@
 import { FaCalendar, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 
 const Dashboard = () => {
+
+    const [cart] = useCart()
+
+
     return (
         <div>
             <div className="drawer drawer-mobile">
@@ -14,21 +19,23 @@ const Dashboard = () => {
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side ]">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+                    <ul className="menu p-4 w-80 text-base-content bg-[#D1A054]">
 
-                        <li><Link> <FaHome></FaHome> User Home</Link></li>
-                        <li><Link> <FaCalendar></FaCalendar> Reservations</Link></li>
-                        <li><Link> <FaWallet></FaWallet> Payment History</Link></li>
-                        <li><Link to='/dashboard/mycart'><FaShoppingCart></FaShoppingCart> My Cart</Link></li>
+                        <li><NavLink to='/dashboard/home'> <FaHome></FaHome> User Home</NavLink></li>
+                        <li><NavLink to='/dashboard/reservations'> <FaCalendar></FaCalendar> Reservations</NavLink></li>
+                        <li><NavLink to='/dashboard/history'> <FaWallet></FaWallet> Payment History</NavLink></li>
+                        <li><NavLink to='/dashboard/mycart'><FaShoppingCart></FaShoppingCart> My Cart
+                            <span className="badge badge-secondary">+{cart?.length || 0}</span>
+                        </NavLink></li>
 
                         <div className="divider">OR</div>
 
-                        <li><Link to='/'><FaHome></FaHome> Home </Link></li>
-                        <li><Link to='/menu'><FaHome></FaHome> Menu</Link></li>
-                        <li><Link to='/contract'><FaHome></FaHome> Shop</Link></li>
-                        <li><Link to='/contract'><FaHome></FaHome>  Contract</Link></li>
+                        <li><NavLink to='/'><FaHome></FaHome> Home </NavLink></li>
+                        <li><NavLink to='/menu'><FaHome></FaHome> Menu</NavLink></li>
+                        <li><NavLink to='/contract'><FaHome></FaHome> Shop</NavLink></li>
+                        <li><NavLink to='/contract'><FaHome></FaHome>  Contract</NavLink></li>
                     </ul>
 
                 </div>
