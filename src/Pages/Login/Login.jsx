@@ -4,6 +4,7 @@ import { AuthContext } from "../../providers/authProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitlePage from "../Shared/TitlePage/TitlePage";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 
 const Login = () => {
@@ -101,12 +102,16 @@ const Login = () => {
                             </div>
 
 
-                            <div className="form-control mt-6">
+                            <div className="form-control mt-3">
                                 <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
 
-                        <p><small>New Here? <Link to='/signup'>Create an account</Link></small></p>
+                        <p className="text-center -mt-8"><small>New Here? <Link to='/signup'>Create an account</Link></small></p>
+
+                        <SocialLogin></SocialLogin>
+
+
                     </div>
                 </div>
             </div>
